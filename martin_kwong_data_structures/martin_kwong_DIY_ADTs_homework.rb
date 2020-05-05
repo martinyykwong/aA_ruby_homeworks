@@ -55,19 +55,37 @@ class Map #using arrays for each key-value pair. no hash map
     def set(key,value) #either create a new key-value pair or update value for a pre-existing key
         @map.each_with_index do |existing_pair, i|
             if existing_pair[0] == key
-                return @map[i][1] = value
+                @map[i][1] = value
+                return @map
             end
         end
-        @map = @map + [[key, value]]
+        @map = @map + [[key,value]]
     end
 
     def get(key)
+        @map.each_with_index do |existing_pair, i|
+            if existing_pair[0] == key
+                return @map[i]
+            end
+        end
+        nil
     end
 
     def delete(key)
+        @map.each_with_index do |existing_pair, i|
+            if (existing_pair[0] == key) && (i < @map.length - 1)
+                new_map = @map[0...i] + @map[i+1..-1]
+                return @map = new_map
+            elsif (existing_pair[0] == key) && (i == @map.length - 1)
+                new_map = @map[0...i]
+                return @map = new_map
+            end
+        end
+        @map
     end
 
     def show
+        @map
     end
 
 end
