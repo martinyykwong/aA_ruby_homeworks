@@ -8,6 +8,7 @@ class Stack
 
     def push(ele) #adds new element to top of stack
         @stack = @stack + [ele]
+        ele
     end
 
     def pop #removes top element from stack
@@ -30,6 +31,7 @@ class Queue
 
     def enqueue(ele)
         @queue = @queue + [ele]
+        ele
     end
 
     def dequeue
@@ -65,9 +67,9 @@ class Map #using arrays for each key-value pair. no hash map
     end
 
     def get(key)
-        @map.each_with_index do |existing_pair, i|
+        @map.each do |existing_pair|
             if existing_pair[0] == key
-                return @map[i]
+                return existing_pair[1]
             end
         end
         nil
@@ -75,11 +77,8 @@ class Map #using arrays for each key-value pair. no hash map
 
     def delete(key)
         @map.each_with_index do |existing_pair, i|
-            if (existing_pair[0] == key) && (i < @map.length - 1)
+            if existing_pair[0] == key
                 new_map = @map[0...i] + @map[i+1..-1]
-                return @map = new_map
-            elsif (existing_pair[0] == key) && (i == @map.length - 1)
-                new_map = @map[0...i]
                 return @map = new_map
             end
         end
