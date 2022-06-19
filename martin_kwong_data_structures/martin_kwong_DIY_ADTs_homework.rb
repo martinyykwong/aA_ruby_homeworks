@@ -36,6 +36,8 @@ class Queue
         removed_ele = @queue[0]
         if @queue.length > 0
             @queue = @queue[1..-1]
+        else
+            @queue = []
         end
         removed_ele
     end
